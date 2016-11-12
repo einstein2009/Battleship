@@ -18,8 +18,13 @@ namespace Battleship
             char column = cons[0];
             int num;
             bool result = Int32.TryParse(cons, out num);
-            
-            if (!Char.IsLetter(column))
+            string upper = cons.ToUpper();
+            String validChars = "ABCDEFGHIJ";
+
+//  mention what valid leters are, and the number range  A-J 1-10 
+//  also this if doesn't check invalid chars like k-Z
+                
+            if (!validChars.Contains(upper))
                 Console.WriteLine("Please enter the correct format e.g. 'B5'");
 
             Console.ReadKey();
@@ -42,14 +47,14 @@ namespace Battleship
 
                 for (int j = 0; j < 10; j++)
                 {
-                    ShipColors(Char.ToString(Grid[i, j]));
-
-                    if (j == 9)
-                    {
-                        Console.Write("|\r\n"); 
-                    }
-                  
+                    if (Grid[i, j] == '.')
+                        Grid[i, j] = 'M';
+                    else
+                        Grid[i, j] = 'H';
+                    ShipColors(Grid[i, j]);
                 }
+
+                Console.Write("|\r\n");
                 Console.WriteLine("---#---#---#---#---#---#---#---#---#---#---#");
             }
         }
@@ -68,7 +73,7 @@ namespace Battleship
             {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
         };
 
-        public static void ShipColors(string useThis)
+        public static void ShipColors(char useThis)
         {
             //P = patrol baot
             //S = Submarine
@@ -77,36 +82,42 @@ namespace Battleship
 
             switch (useThis)
             {
-                case ".":
+                case '.':
                     Console.Write("|   ");
                     break;
-                case "A":
+                case 'A':
                     Console.Write("|");
                     Console.BackgroundColor = ConsoleColor.Blue;
                     Console.Write(" A ");
                     break;
-                case "B":
+                case 'B':
                     Console.Write("|");
                     Console.BackgroundColor = ConsoleColor.Green;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.Write(" B ");
                     break;
-                case "P":
+                case 'P':
                     Console.Write("|");
                     Console.BackgroundColor = ConsoleColor.Yellow;
                     Console.ForegroundColor = ConsoleColor.Black;
 
                     Console.Write(" P ");
                     break;
-                case "S":
+                case 'S':
                     Console.Write("|");
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.Write(" S ");
                     break;
-                case "H":
-                    Console.Clear();
-
+                case 'H':
+                    Console.Write("|");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" X ");
+                    break;
+                case 'M':
+                    Console.Write("|");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" X ");
                     break;
 
             }
