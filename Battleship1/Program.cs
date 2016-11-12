@@ -12,22 +12,41 @@ namespace Battleship
         static void Main(string[] args)
 
         {
-            printGrid(Grid);
-            Console.WriteLine("Enter your guess:");
-            string cons = Console.ReadLine();
-            char column = cons[0];
-            int num;
-            bool result = Int32.TryParse(cons, out num);
-            string upper = cons.ToUpper();
-            String validChars = "ABCDEFGHIJ";
+            do
+            {
+                Console.WriteLine("Type -1 to exit.");
+                printGrid(Grid);
+                Console.WriteLine("Enter your guess:");
+                string cons = Console.ReadLine();
+                char column = cons[0];
+                int num;
+                bool result = Int32.TryParse(cons, out num);
+                string upper = cons.ToUpper();
+                string validChars = "ABCDEFGHIJ";
 
-//  mention what valid leters are, and the number range  A-J 1-10 
-//  also this if doesn't check invalid chars like k-Z
-                
-            if (!validChars.Contains(upper))
-                Console.WriteLine("Please enter the correct format e.g. 'B5'");
+                if (!validChars.Contains(upper) || (num > 11))
+                {
+                    Console.WriteLine("Please enter the correct format e.g. 'B5'");
+                }
+                else if (Console.ReadLine() == "-1")
+                {
+                    return;
+                }
 
-            Console.ReadKey();
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (Grid[i, j] == '.')
+                            Grid[i, j] = 'M';
+                        else
+                            Grid[i, j] = 'H';
+                    }
+                }
+
+                Console.ReadKey();
+            }
+            while (Console.ReadLine() != "-1");
         }
 
         public static void printGrid(Char[,] Grid)
@@ -47,10 +66,6 @@ namespace Battleship
 
                 for (int j = 0; j < 10; j++)
                 {
-                    if (Grid[i, j] == '.')
-                        Grid[i, j] = 'M';
-                    else
-                        Grid[i, j] = 'H';
                     ShipColors(Grid[i, j]);
                 }
 
