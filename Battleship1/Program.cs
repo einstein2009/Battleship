@@ -21,8 +21,7 @@ namespace Battleship
                 string cons = Console.ReadLine();
                 cons = cons.ToUpper();
                 char column = cons[0];
-                int num = cons.IndexOf(column);
-                if (num == -1) break;
+                int num = cons[1];
                 bool result = Int32.TryParse(cons, out num);
                 string validChars = "ABCDEFGHIJ";
 
@@ -34,10 +33,25 @@ namespace Battleship
                 {
                     Console.WriteLine("Please enter only A-J, and 1-10 e.g 'B5'");
                 }
-                else
-                    ShipColors(Convert.ToChar(cons[0]));
+
+                Console.WriteLine("num = {0}, column = {1}", num, column);
+                
             } 
         }
+
+        private static readonly char[,] Grid = new char[,]
+       {
+            {'.', '.', '.', '.', 'S', 'S', 'S', '.', '.', '.'},
+            {'P', 'P', '.', '.', '.', '.', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', 'P'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', 'P'},
+            {'.', '.', 'A', 'A', 'A', 'A', 'A', '.', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', 'B', '.', '.'},
+            {'.', 'S', '.', '.', '.', '.', '.', 'B', '.', '.'},
+            {'.', 'S', '.', '.', '.', '.', '.', 'B', 'P', 'P'},
+            {'.', 'S', '.', '.', '.', '.', '.', 'B', '.', '.'},
+            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+       };
 
         public static void printGrid(Char[,] Grid)
         {
@@ -63,20 +77,6 @@ namespace Battleship
                 Console.WriteLine("---#---#---#---#---#---#---#---#---#---#---#");
             }
         }
-
-        private static readonly char[,] Grid = new char[,]
-        {
-            {'.', '.', '.', '.', 'S', 'S', 'S', '.', '.', '.'},
-            {'P', 'P', '.', '.', '.', '.', '.', '.', '.', '.'},
-            {'.', '.', '.', '.', '.', '.', '.', '.', '.', 'P'},
-            {'.', '.', '.', '.', '.', '.', '.', '.', '.', 'P'},
-            {'.', '.', 'A', 'A', 'A', 'A', 'A', '.', '.', '.'},
-            {'.', '.', '.', '.', '.', '.', '.', 'B', '.', '.'},
-            {'.', 'S', '.', '.', '.', '.', '.', 'B', '.', '.'},
-            {'.', 'S', '.', '.', '.', '.', '.', 'B', 'P', 'P'},
-            {'.', 'S', '.', '.', '.', '.', '.', 'B', '.', '.'},
-            {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        };
 
         public static void ShipColors(char useThis)
         {
