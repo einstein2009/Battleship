@@ -22,28 +22,19 @@ namespace Battleship
                 char column = cons[0];
                 int num;
                 bool result = Int32.TryParse(cons, out num);
-                string upper = cons.ToUpper();
+                char.ToUpper(column);
                 string validChars = "ABCDEFGHIJ";
 
-                if (upper == "QUIT")
+                if (Console.ReadLine() == "QUIT")
                 {
                     return;
                 }
-                else if (validChars.Contains(upper) || (num > 11))
+                else if (!validChars.Contains(column) || (num > 11))
                 {
                     Console.WriteLine("Please enter the correct format e.g. 'B5'");
                 }
-                for (int i = 0; i < 10; i++)
-                {
-                    for (int j = 0; j < 10; j++)
-                    {
-                        if (cons == ".")
-                            Grid[i, j] = 'M';
-                        else
-                            Grid[i, j] = 'H';
-                    }
-                }
 
+                
             }
         }
 
