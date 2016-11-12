@@ -12,30 +12,31 @@ namespace Battleship
         static void Main(string[] args)
 
         {
-            
+
             while (true)
             {
                 printGrid(Grid);
                 Console.WriteLine("Type 'quit' to exit.");
                 Console.WriteLine("Enter your guess:");
                 string cons = Console.ReadLine();
+                cons = cons.ToUpper();
                 char column = cons[0];
-                int num;
+                int num = cons.IndexOf(column);
+                if (num == -1) break;
                 bool result = Int32.TryParse(cons, out num);
-                char.ToUpper(column);
                 string validChars = "ABCDEFGHIJ";
 
-                if (Console.ReadLine() == "QUIT")
+                if (cons == "QUIT")
                 {
                     return;
                 }
-                else if (!validChars.Contains(column) || (num > 11))
+                else if (!validChars.Contains(column) || (num >= 11))
                 {
-                    Console.WriteLine("Please enter the correct format e.g. 'B5'");
+                    Console.WriteLine("Please enter only A-J, and 1-10 e.g 'B5'");
                 }
-
-                
-            }
+                else
+                    ShipColors(Convert.ToChar(cons[0]));
+            } 
         }
 
         public static void printGrid(Char[,] Grid)
