@@ -12,10 +12,11 @@ namespace Battleship
         static void Main(string[] args)
 
         {
-            do
+            
+            while (true)
             {
-                Console.WriteLine("Type -1 to exit.");
                 printGrid(Grid);
+                Console.WriteLine("Type 'quit' to exit.");
                 Console.WriteLine("Enter your guess:");
                 string cons = Console.ReadLine();
                 char column = cons[0];
@@ -24,29 +25,26 @@ namespace Battleship
                 string upper = cons.ToUpper();
                 string validChars = "ABCDEFGHIJ";
 
-                if (!validChars.Contains(upper) || (num > 11))
-                {
-                    Console.WriteLine("Please enter the correct format e.g. 'B5'");
-                }
-                else if (Console.ReadLine() == "-1")
+                if (upper == "QUIT")
                 {
                     return;
                 }
-
+                else if (validChars.Contains(upper) || (num > 11))
+                {
+                    Console.WriteLine("Please enter the correct format e.g. 'B5'");
+                }
                 for (int i = 0; i < 10; i++)
                 {
                     for (int j = 0; j < 10; j++)
                     {
-                        if (Grid[i, j] == '.')
+                        if (cons == ".")
                             Grid[i, j] = 'M';
                         else
                             Grid[i, j] = 'H';
                     }
                 }
 
-                Console.ReadKey();
             }
-            while (Console.ReadLine() != "-1");
         }
 
         public static void printGrid(Char[,] Grid)
