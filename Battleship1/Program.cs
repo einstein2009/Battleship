@@ -46,7 +46,7 @@ namespace Battleship
 
                     if (j == 9)
                     {
-                        Console.Write("|\r\n");
+                        Console.Write("|\r\n"); 
                     }
                   
                 }
